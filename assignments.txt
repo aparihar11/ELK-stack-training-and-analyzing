@@ -1,0 +1,28 @@
+################### QUESTION 3 a ################################
+GET /cars/cars_db/_mapping
+  
+GET  /cars_twitter/tweets/_mapping
+
+
+################## QUESTION 3 b 1  #################################
+
+GET /cars_twitter/tweets/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+################# QUESTION 3 B 2 ####################################
+
+GET /cars/cars_db/_search
+{
+  "query": {
+    "fuzzy": {
+      "name": {
+        "value": "lobster",
+        "fuzziness": "auto"
+      }
+    }
+  }
+}
