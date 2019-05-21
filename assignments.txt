@@ -26,3 +26,36 @@ GET /cars/cars_db/_search
     }
   }
 }
+
+
+################# QUESTION 3 B 3 ####################################
+
+GET /cars/cars_db/_search
+{
+  "query": {
+    "fuzzy": {
+      "name": {
+        "value": "lobster",
+        "fuzziness": "auto"
+      }
+    }
+  }
+}
+
+
+
+
+
+################# QUESTION 3 B 4 ####################################
+GET /cars/cars_db/_search
+{
+   "_source": true,
+  "query": {
+    "range": {
+      "sellingPrice": {
+        "gte": 20000,
+        "lte": 30000
+      }
+    }
+  }
+}
