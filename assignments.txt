@@ -13,40 +13,34 @@ GET /cars_twitter/tweets/_search
   }
 }
 
-################# QUESTION 3 B 2 ####################################
+################# QUESTION 3 B 2 OLD TIMER ####################################
 
-GET /cars/cars_db/_search
+GET /cars/car_db/_search
 {
   "query": {
-    "fuzzy": {
-      "name": {
-        "value": "lobster",
-        "fuzziness": "auto"
-      }
-    }
-  }
-}
-
-
-################# QUESTION 3 B 3 ####################################
-
-GET /cars/cars_db/_search
-{
-  "query": {
-    "fuzzy": {
-      "name": {
-        "value": "lobster",
-        "fuzziness": "auto"
-      }
+    "match": {
+      "age_group": "oldtimer"
     }
   }
 }
 
 
 
+################# QUESTION 3 B 3 GERMAN CARS ####################################
+
+GET /cars/car_db/_search
+{
+  "query": {
+    "terms": {
+      "brandName.keyword": [ "Audi", "BMW", "Mercedes", "Opel", "Porsche", "Volkswagen" ]
+    }
+  }
+}
 
 
-################# QUESTION 3 B 4 ####################################
+
+
+################# QUESTION 3 B 4 CAR RANGE SEARCH ####################################
 GET /cars/cars_db/_search
 {
    "_source": true,
@@ -59,3 +53,75 @@ GET /cars/cars_db/_search
     }
   }
 }
+
+
+
+################# QUESTION 3 B 5 Return the models of which the name only consist of numbers ####################################
+
+GET /cars/car_db/_search
+{
+  "query": {
+    "regexp": {
+      "modelName.keyword": "[0-9]"
+    }
+  }
+}
+
+
+################# QUESTION 3 B 6 Return the tweets that have a brand field that is not null ####################################
+
+
+GET /cars_twitter/tweets/_search
+{
+    "query" : {
+        "constant_score" : {
+            "filter" : {
+                "exists" : { "field" : "brand" }
+            }
+        }
+    }
+}
+
+
+
+################# QUESTION 3 B 7 Return the tweets that contain Mercedes (case insensitive) in their text body. ####################################
+
+GET /cars_twitter/tweets/_search
+{
+  "query": {
+    "match": {
+      "text": "Mercedes"
+    }
+  }
+}
+
+
+
+################# QUESTION 3 B 8 Return the tweets that have audi (case insensitive) in their hashtags or mentions ####################################
+
+
+
+
+
+################# QUESTION 3 B 9
+Question 9:Create a query that returns the tweets with the exact phrase "sports car" (case insensitive) in their text.
+ ####################################
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
